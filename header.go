@@ -12,7 +12,7 @@ import (
 )
 
 var typeRe = `String|Integer|Float|Flag|Character|Unknown`
-var infoRegexp = regexp.MustCompile(fmt.Sprintf(`##INFO=<ID=(.+),Number=([\dAGR\.]*),Type=(%s),Description="(.*)">`, typeRe))
+var infoRegexp = regexp.MustCompile(fmt.Sprintf(`^##INFO=<(?=.*,ID=(.+))|(?=.*ID=(.+),)(?=.*,Number=([\dAGR\.]*))|(?=.*Number=([\dAGR\.]*),)(?=.*,Type=(%s))|(?=.*Type=(%s),)(?=.*,Description="(.*)")|(?=.*Description="(.*)",).*>`, typeRe, typeRe))
 var formatRegexp = regexp.MustCompile(fmt.Sprintf(`##FORMAT=<ID=(.+),Number=([\dAGR\.]*),Type=(%s),Description="(.*)">`, typeRe))
 var filterRegexp = regexp.MustCompile(`##FILTER=<ID=(.+),Description="(.*)">`)
 var contigRegexp = regexp.MustCompile(`contig=<.*((\w+)=([^,>]+))`)
